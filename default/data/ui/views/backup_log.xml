@@ -1,0 +1,24 @@
+<dashboard version="1.1">
+  <label>Log</label>
+  <description>here is an overview over the historical backups</description>
+  <row>
+    <panel>
+      <title>last 7 days backup backups</title>
+      <table>
+        <search>
+          <query>index=_internal sourcetype=cloudbackup sid type time_start=* | sort - time_start | table time_start time_end type target status filename sizeMB shasum sid| convert ctime(time_start) ctime(time_end)</query>
+          <earliest>-7d@d</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">20</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+  </row>
+</dashboard>

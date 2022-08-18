@@ -1,7 +1,8 @@
 <nav search_view="search">
-  <view name="search" default='true' />
-  <view name="datasets" />
+  <view name="overview" default='true' />
+  <view name="backup_log" />
+  <view name="setup_page" />
+  <view name="search" />
   <view name="reports" />
-  <view name="alerts" />
-  <view name="dashboards" />
+  <view name="help_s3" />
 </nav>

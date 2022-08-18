@@ -1,0 +1,24 @@
+<dashboard version="1.1">
+  <label>Configuration</label>
+  <description>this is an overview of your configured backup targets.. use them with the custom command | appbackup conn=NAME or | kvbackup conn=NAME</description>
+  <row>
+    <panel>
+      <title>configured backup targets</title>
+      <table>
+        <search>
+          <query>| inputlookup backupconfig</query>
+          <earliest>-7d@d</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">20</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+  </row>
+</dashboard>

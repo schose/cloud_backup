@@ -1,0 +1,88 @@
+<dashboard  version="1.1" stylesheet="cloudbackup.css">
+  <label>Help</label>
+  <row>
+    <panel>
+      <html>
+        <p>
+          Here you will find some information how to setup a Amazon S3 bucket to use with this app.
+        </p>
+        
+        <hr />
+        
+        <div id="getting_started">
+
+          <h1>Logging into AWS</h1>
+          <p>
+            Point your browser to <a href="https://console.aws.amazon.com" target="_blank">"https://console.aws.amazon.com</a> and log in using your AWS account. You will be presented with the AWS homepage:
+            By using the “Services” button in the upper left corder, a menu of all services provided by AWS can be opened: choose S3. 
+          </p>
+          
+          <hr />
+          
+          <h1>Creating a bucket</h1>
+          <p>
+           First you need to create a bucket to store your backups. Choose "Create bucket".
+           </p>
+           <img src="/static/app/cloud_backup/help_s3_create_bucket.png" width="700px" />
+          
+          <p>Choose a name and a region for your new bucket. For this help the bucketname the bucket will be named "dev-splunkcloudbackup".
+          <br></br>
+          It is not necessary to configure any special properties or permissions of the bucket just yet. Therefore, just finish the wizard without making any further changes.
+          </p>
+        
+        </div>
+        
+
+        <hr />
+
+          <h1>Create IAM Policy</h1>
+            <p>
+            Navigate to IAM -> Roles and choose "Create policy". Here you can choose between the Visual Editor or the JSON Editor. If you choose the JSON Editor you can copy and paste this policy into the editor. 
+            Just make sure to change "dev-splunkcloudbackup" to the name of your bucket.
+<pre>
+      {
+          "Version": "2012-10-17",
+          "Statement": [
+              {
+                  "Effect": "Allow",
+                  "Action": [
+                      "s3:PutObject",
+                      "s3:GetObject",
+                      "s3:DeleteObject"
+                  ],
+                  "Resource": "arn:aws:s3:::dev-splunkcloudbackup/*"
+              },
+              {
+                  "Effect": "Allow",
+                  "Action": [
+                      "s3:ListBucket",
+                      "s3:GetBucketLocation"
+                  ],
+                  "Resource": "arn:aws:s3:::dev-splunkcloudbackup"
+              }
+          ]
+      }
+</pre>
+            </p>
+        <img src="/static/app/cloud_backup/help_s3_create_policy.png" width="700px" />
+
+
+        <p>now you can save the policy. We choose the name "dev-splunkcloudbackup" here.</p>
+
+          <hr />
+
+
+          <h1>Create user in IAM</h1>
+          <p>Use the "Services" menu to navigate to "IAM" (Identity and Access Management) and create a new user. Here we named the user "dev-splunkcloudbackup".</p>
+          <img src="/static/app/cloud_backup/help_s3_create_user.png" width="700px" />
+          <p>As the new created user will never need to logon, just choose "Programmatic access". Next, you will assign the policy created in the last step to the new user.
+          Choose "Attach existing policies directly", search for the policy named "dev-splunkcloudbackup" and assign it.</p>
+          <img src="/static/app/cloud_backup/help_s3_create_user-keys.png" width="700px" />
+          <p>Copy the access_key and and secret_key to a save location or directly into the apps setup view. <br></br>Happy Backup!</p>
+
+
+
+      </html>
+    </panel>
+  </row>
+</dashboard>

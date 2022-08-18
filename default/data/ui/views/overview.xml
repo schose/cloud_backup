@@ -1,0 +1,155 @@
+<dashboard  version="1.1" stylesheet="cloudbackup.css">
+  <label>Overview</label>
+  <row>
+    <panel>
+      <html>
+        <p>
+          The Splunk Cloud Backup App provides 2 custom commands to backup/export your splunk apps and kvstore data to a S3 compatible storage. 
+        </p>
+        
+        <hr />
+        
+        <div id="getting_started">
+
+          <h1>Getting started</h1>
+          <p>
+            You have to configure at lease one connection before you can run the custom commands
+          </p>
+          
+          <hr />
+          
+          <h1>Configuration</h1>
+          <p>
+           The configuration of your connection is saved in /storage/passwords backend. To setup a connection use the "Setup" tab and enter following information.
+          </p>
+
+          <p>
+            <table class="mytableclass">
+              <tr>
+                <td><b>value</b></td>
+                <td><b>description</b></td>
+              </tr>
+              <tr>
+                <td>name</td>
+                <td>name the connection, will be used in conn argument for the "| appbackup" and "| kvbackup"  commands.</td>
+              </tr>
+              <tr>
+                <td>s3 endpoint </td>
+                <td>The endpoint url of your S3 storage.</td>
+              </tr>
+              <tr>
+                <td>s3 bucketname</td>
+                <td>Give name of your S3 bucket</td>
+              </tr>
+              <tr>
+                <td>s3 region</td>
+                <td>The region of your S3 storage. This is a value like "eu-central-1". see <a href="https://docs.aws.amazon.com/general/latest/gr/s3.html" target="_blank">Amazon Simple Storage Service endpoints</a></td>
+              </tr>        
+              <tr>
+                <td>s3 key</td>
+                <td>The key of your S3 storage</td>
+              </tr>
+              <tr>
+                <td>s3 secret</td>
+                <td>The secret of your S3 storage</td>
+              </tr>    
+            </table>
+          </p>
+        
+        </div>
+        
+        <hr />
+
+
+          <h1>run the app backup</h1>
+            <p>
+              the command <b>"| appbackup"</b> will create a backup of your apps.
+              <br></br>
+              arguments:
+            </p>
+            <table class="mytableclass">
+              <tr>
+                <td><b>argument</b></td>
+                <td><b>description</b></td>
+                <td><b>mandatory</b></td>
+              </tr>
+              <tr>
+                <td>conn</td>
+                <td>name the connection</td>
+                <td>true</td>
+              </tr>
+              <tr>
+                <td>apps</td>
+                <td>appname, comma seperated list of appnames or "*"</td>
+                <td>true</td>
+              </tr>
+              <tr>
+                <td>userdirs</td>
+                <td>determines if objects in etc/users should also included in backup. possible values: "t","true","f" or "false" default: false </td>
+                <td>false</td>
+              </tr>
+             </table>
+            <br></br>
+            <p>example:</p>
+            <pre>| appbackup apps="search,mycustomapp" conn=aws</pre>
+        
+        <hr />
+
+          <h1>run the kvstore backup</h1>
+            <p>
+              the command <b>"| kvstorebackup"</b> will copy the last fullbackup of your kvstores.
+              <br></br>
+              arguments:
+      </p>
+            <table class="mytableclass">
+              <tr>
+                <td><b>argument</b></td>
+                <td><b>description</b></td>
+                <td><b>mandatory</b></td>
+              </tr>
+              <tr>
+                <td>conn</td>
+                <td>name the connection</td>
+                <td>true</td>
+              </tr>
+             </table>
+          <br></br>
+            <p>example:</p>
+            <pre>| kvbackup conn=aws</pre>
+
+<br></br>
+      <h1>Troubleshooting</h1>
+
+<p><b>Question: I receive an errormessage: S3UploadFailedError at .. The Access Key Id you provided does not exist in our records</b></p>
+<p>A: Check your connection configuration, ensure s3_key, s3_secret and s3_bucketname in configuration</p>
+
+<p><b>Question: When running the command i do not get any Feedbackup</b></p>
+<p>Answer: Creating the backup might take some time as some apps could be huge (ML toolkit>500MB).</p>
+
+check the logfile:
+<pre>
+index=_internal sourcetype=cloudbackup
+</pre>
+
+<p>Answer: Also ensure that the target host is available. For hosts with a configured custom endpoints out might have to configure outbound 
+connections using ACS.<a href="https://docs.splunk.com/Documentation/SplunkCloud/8.2.2203/Config/ConfigureOutboundPorts" target="_blank">(link)</a></p>
+
+<p><b>Question: are temporary files being deleted after backup</b></p>
+<p>Answer: | appbackup creates a tempfile in /tmp directory </p>
+
+<p><b>Question: Will it run on Splunk for Windows</b></p>
+<p>Answer: not sure - most propably not</p>
+
+<br></br>
+      <h1>Compability</h1>
+
+      We tested the commands against the following:
+
+      <ol>
+      <li>Splunk Cloud Plattform v8.2.2203.2</li>
+      <li>Splunk Enterprise v8.2, v9.0</li>
+      </ol>
+      </html>
+    </panel>
+  </row>
+</dashboard>

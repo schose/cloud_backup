@@ -1,7 +1,7 @@
 cloud backup for splunk
 ========================================
 
-This app will create backup of your apps and kvstore running in Splunk Cloud.
+This app will create backup of your apps and kvstore running in Splunk Cloud or onprem.
 
 
 #### Amazon S3 ####
@@ -71,4 +71,18 @@ https://us-east-1.console.aws.amazon.com/iam/home#/users$new?step=details
 
 ``` 
 | kvlbackupp s3_endpoint_url="http://1.2.3.4:9000" s3_key="mykey" s3_region="US" s3_secret="mysecret" s3_bucket_name="appbackups"
+```
+
+### setup ###
+
+```
+| makeresults 
+| eval name = "test"
+| eval s3_endpoint_url = "http://192.168.53.49:9000"
+| eval s3_key = "mykey"
+| eval s3_secret = "mysecret"
+| eval s3_region = "myregion"
+| eval s3_bucket_name = "mybucketname"
+| eval s3_backup_prefix = "myprefix"
+| outputlookup backupconfig
 ```
