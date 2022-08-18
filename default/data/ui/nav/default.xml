@@ -4,5 +4,8 @@
   <view name="setup_page" />
   <view name="search" />
   <view name="reports" />
-  <view name="help_s3" />
+  <collection label="Help">
+    <view name="help_s3" />
+    <view name="help_contact" />
+  </collection>
 </nav>

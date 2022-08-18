@@ -1,0 +1,32 @@
+<dashboard  version="1.1" stylesheet="cloudbackup.css">
+  <label>Contact</label>
+  <row>
+    <panel>
+      <html>
+      <h1>Sources</h1>
+        <p>
+          Find the app repository here <a href="https://github.com/schose/cloud_backup" target="_blank">https://github.com/schose/cloud_backup</a>
+        </p>
+        
+        <hr />
+        <h1>Contact</h1>
+
+<div class="brbr">      
+<p>
+
+<pre> 
+Andreas Roth / Batchworks
+Charlottenstrasse 38
+01099 Dresden
+Germany
+
+E-Mail: andreas@batchworks.de
+Internet: www.batchworks.de
+</pre>
+</p>
+</div>
+
+      </html>
+    </panel>
+  </row>
+</dashboard>

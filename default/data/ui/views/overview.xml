@@ -13,14 +13,14 @@
 
           <h1>Getting started</h1>
           <p>
-            You have to configure at lease one connection before you can run the custom commands
+            You have to configure at least one connection before you can run the custom commands.
           </p>
           
           <hr />
           
           <h1>Configuration</h1>
           <p>
-           The configuration of your connection is saved in /storage/passwords backend. To setup a connection use the "Setup" tab and enter following information.
+           The configuration of your connection is saved in /storage/passwords backend. To setup a connection use the <a href="setup_page">Setup</a> tab and enter following information.
           </p>
 
           <p>
@@ -31,7 +31,7 @@
               </tr>
               <tr>
                 <td>name</td>
-                <td>name the connection, will be used in conn argument for the "| appbackup" and "| kvbackup"  commands.</td>
+                <td>name the connection, will be used in conn argument for the "| appbackup" and "| kvbackup"  commands.</td>
               </tr>
               <tr>
                 <td>s3 endpoint </td>
@@ -134,11 +134,9 @@ index=_internal sourcetype=cloudbackup
 <p>Answer: Also ensure that the target host is available. For hosts with a configured custom endpoints out might have to configure outbound 
 connections using ACS.<a href="https://docs.splunk.com/Documentation/SplunkCloud/8.2.2203/Config/ConfigureOutboundPorts" target="_blank">(link)</a></p>
 
-<p><b>Question: are temporary files being deleted after backup</b></p>
-<p>Answer: | appbackup creates a tempfile in /tmp directory </p>
+<p><b>Question: are temporary files being deleted after backup?</b></p>
+<p>Answer: | appbackup creates a tempfile in /tmp directory. Those files are being deleted after upload.</p>
 
-<p><b>Question: Will it run on Splunk for Windows</b></p>
-<p>Answer: not sure - most propably not</p>
 
 <br></br>
       <h1>Compability</h1>
